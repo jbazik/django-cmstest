@@ -1,0 +1,19 @@
+#!/bin/bash -i
+
+app=$(basename $(dirname $(find $(dirname $0) -path '*/tests')))
+
+dir=$(mktemp -d)
+trap "rm -rf $dir" 0 1 2 5 10 15
+
+virtualenv $dir
+
+. $dir/bin/activate
+pip install -r $app/tests/requirements.txt
+
+while true; do
+	echo ""
+	echo -n "Run tests (Y|n)? "
+	read a
+	[ "$a" = n ] && break
+	python $app/tests/runtests.py
+done

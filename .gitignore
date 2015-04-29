@@ -1,0 +1,8 @@
+*.pyc
+*.sqlite3
+*.egg-info
+.history
+build
+dist
+MANIFEST
+MANIFEST.in
